@@ -1,22 +1,80 @@
-.App {
+html,
+body,
+.app {
+  height: 100vh; 
+}
+p {
+  margin-bottom: 1em;
+}
+body {
+  margin: 0;
+}
+.app {
+  display: flex;
+  flex-direction: column;
+}
+header {
+  flex-shrink: 0;
+  display: grid;
+  display: inline-flex;
+  background-color: lavenderblush;
+  right:0;
+  left:0;
+  margin-top: 0;
+}
+header h1{
+  width: 100vw;
+  font-size: 4em;
+  margin-top: 20px;
+  margin-bottom: 20px;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.main {
+  flex: 1 1 auto;
+  position: relative;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+}
+.add-item-comp{
+  margin-left: 20px;
 }
 
-.App-link {
-  color: #09d3ac;
+.add-item-form{
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+}
+.add-item-form input, .add-item-form textarea, .add-item-form select{
+  margin-bottom: 10px;
+}
+.image-list{
+  width: 500px;
+  margin-bottom: 10px;
+}
+.new-item-images{
+  width: 100px;
+  height: 100px;
+}
+#add-new-item-btn{
+  width: 500px;
+}
+
+#selected-image-text{
+  width:413px;
+}
+
+#selected-image-btn{
+  width:80px;
+}
+
+footer {
+  flex: 0 0 auto;
+  padding-top: 20px;
+  background-color: lavenderblush;
+  text-align: center;
+}
+#copyright{
+  text-align: center;
+  color: black;
 }
