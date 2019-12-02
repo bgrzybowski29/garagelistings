@@ -19,7 +19,7 @@ FuelEconomy.gov
 ![](Register.png)
 
 ### Installation Instructions
-####Development:  
+#### Development:  
 rails new . --api --database=postgresql  
 npx create-react-app client  
 rails g scaffold User username:string email:string password_digest:string  
@@ -33,10 +33,10 @@ rails db:seed
 bundle install  
 cd client  
 npm install axios\nnpm install react-router-dom 
-####Production:   
+#### Production:   
 TBD
 
-###ERD:
+### ERD:
 ![](erd.png)
 
 #### MVP
@@ -82,7 +82,7 @@ TBD
 **CreateListing** - This will render the create listing form.   
 **ViewListing** - This will render listing details.
 
-###Routes
+### Routes
 ![](routes.png)
 
 Component  | Priority | Estimated Time | Time Invetsted
