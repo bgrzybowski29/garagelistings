@@ -73,10 +73,10 @@ const AddItem = (props) => {
 
   const setAutomobile = async (event) => {
     setModelOption(event.target.value)
-    setSelection(`Year: ${year}, Make: ${make}, Model: ${model}, Options: ${event.target.value}`);
+    //setSelection(`Year: ${year}, Make: ${make}, Model: ${model}, Options: ${event.target.value}`);
   }
   const addNewItem = async () => {
-    console.log(`Call api witn this data: Title:${title}, Description: ${description}, Year: ${year}, Make: ${make}, Model: ${model}, Options: ${modelOption}, Images: ${images}`);
+    setSelection(`Call api with this data: Title:${title}, Description: ${description}, Year: ${year}, Make: ${make}, Model: ${model}, Options: ${modelOption}, Images: ${images}`);
   }
   const addNewImage = async (image) => {
     let i = images;
