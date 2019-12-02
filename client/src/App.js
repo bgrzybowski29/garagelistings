@@ -5,13 +5,9 @@ import Footer from './components/Footer';
 import { Route, Link } from 'react-router-dom';
 import LoginForm from './components/LoginForm';
 import RegisterForm from './components/RegisterForm';
-import Comments from './components/Comments';
 import { withRouter } from 'react-router';
 import { verifyUser } from './services/api-helper';
-import AddItem from './components/AddItem';
-import MyItems from './components/MyItems';
-import SavedItems from './components/SavedItems';
-import AllItems from './components/AllItems';
+import Home from './components/Home';
 
 const App = (props) => {
   const [currentUser, setcurrentUser] = useState(null);
@@ -45,13 +41,7 @@ const App = (props) => {
       <main className="main">
         {
           currentUser ?
-            <>
-              <Comments />
-              <AddItem />
-              <MyItems currentUser={currentUser} />
-              <SavedItems currentUser={currentUser} />
-              <AllItems currentUser={currentUser} />
-            </>
+            <Home currentUser={currentUser} />
             :
             <></>
         }

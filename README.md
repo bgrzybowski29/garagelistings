@@ -54,6 +54,8 @@ TBD
 * Feedback system for buyers and sellers.
 * Search functionality for items\listings.
 * Listing fee\selling fee system.
+* Q&A between buyer and seller which renders with the listing.
+
 
 #### Functional Components
 * Header
@@ -79,6 +81,9 @@ TBD
 **AllListings** - This will render all listings.
 **CreateListing** - This will render the create listing form.   
 **ViewListing** - This will render listing details.
+
+###Routes
+![](routes.png)
 
 Component  | Priority | Estimated Time | Time Invetsted
 ---------- | -------- | -------------- | --------------

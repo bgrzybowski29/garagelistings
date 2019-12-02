@@ -15,7 +15,9 @@ export default function SavedItems(props) {
   return (
     <div>
       <h1>Saved Items</h1>
-      <p>{JSON.stringify(items)}</p>
+      {items && items.map(item => (
+        <p> {JSON.stringify(item)}</p>
+      ))}
     </div>
   )
 }

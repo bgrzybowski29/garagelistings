@@ -15,7 +15,9 @@ export default function MyItems(props) {
   return (
     <div>
       <h1>My Items</h1>
-      <p>{JSON.stringify(items)}</p>
+      {items && items.map(item => (
+        <p> {JSON.stringify(item)}</p>
+      ))}
     </div>
   )
 }

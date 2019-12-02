@@ -1,3 +1,11 @@
+@import url("http://fonts.googleapis.com/css?family=Open+Sans:400,600,700");
+@import url("http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css");
+*, *:before, *:after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 html,
 body,
 .app {
@@ -55,6 +63,7 @@ header h1{
 .new-item-images{
   width: 100px;
   height: 100px;
+  padding: 5px;
 }
 #add-new-item-btn{
   width: 500px;
@@ -78,3 +87,75 @@ footer {
   text-align: center;
   color: black;
 }
+
+/* tabs start */
+/* .tabs {
+  min-width: 95%;
+  max-width: 95%;
+  margin: 0 auto;
+  background: #fff;
+  box-shadow: 1px 5px 5px 1px gray;
+  height: 95%;
+} */
+
+section {
+  display: none;
+  padding: 20px 0 0;
+  border-top: 1px solid #ddd;
+}
+
+.tab-inputs {
+  display: none;
+}
+
+.tab-labels {
+  display: inline-block;
+  margin: 0 0 -1px;
+  padding: 15px 25px;
+  font-weight: 600;
+  text-align: center;
+  color: #bbb;
+  border: 1px solid transparent;
+}
+
+.tab-labels:before {
+  font-family: fontawesome;
+  font-weight: normal;
+  margin-right: 10px;
+}
+
+.tab-labels[for*='1']:before {
+  content: '\f007';
+}
+
+.tab-labels[for*='2']:before {
+  content: '\f02e';
+}
+
+.tab-labels[for*='3']:before {
+  content: '\f00b';
+}
+.tab-labels[for*='4']:before {
+  content: '\f067';
+}
+
+.tab-labels:hover {
+  color: #888;
+  cursor: pointer;
+}
+
+.tab-inputs:checked + .tab-labels {
+  color: #555;
+  border: 1px solid #ddd;
+  border-top: 2px solid orange;
+  border-bottom: 1px solid #fff;
+}
+
+#tab1:checked ~ #content1,
+#tab2:checked ~ #content2,
+#tab3:checked ~ #content3,
+#tab4:checked ~ #content4{
+  display: block;
+}
+
+/* tabs end */
