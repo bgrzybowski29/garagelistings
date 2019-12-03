@@ -50,7 +50,37 @@ export const getItem = async (id) => {
   const resp = await api.get(`/items/${id}`);
   return resp.data
 }
-
+export const addItem = async (data, images) => {
+  const resp = await api.post("/items", data);
+  images.forEach(async (image) =>
+    await addItemImage(resp.data.id, image)
+  );
+  return resp.data
+}
+export const addItemImage = async (itemId, image) => {
+  const resp = await api.post("/item_images", { image_url: image, item_id: itemId })
+  return resp.data
+}
+export const editItem = async (data, ) => {
+  const resp = await api.put(`/items/${data.id}`, data);
+  return resp.data
+}
+export const deleteItem = async (id) => {
+  const resp = await api.delete(`/items/${id}`);
+  return resp.data
+}
+export const deleteImage = async (id) => {
+  const resp = await api.delete(`/item_images/${id}`);
+  return resp.data
+}
+export const saveItem = async (id) => {
+  const resp = await api.post(`users/savedItems/${id}`);
+  return resp.data
+}
+export const unSaveItem = async (id) => {
+  const resp = await api.delete(`users/savedItems/${id}`);
+  return resp.data
+}
 // https://www.fueleconomy.gov/ws/rest/vehicle/menu/year
 // https://www.fueleconomy.gov/ws/rest/vehicle/menu/make?year=2012
 // https://www.fueleconomy.gov/ws/rest/vehicle/menu/model?year=2012&make=Honda

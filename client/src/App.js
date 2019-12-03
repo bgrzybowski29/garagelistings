@@ -9,6 +9,7 @@ import { withRouter } from 'react-router';
 import { verifyUser } from './services/api-helper';
 import Home from './components/Home';
 import ItemDetails from './components/ItemDetails';
+import EditItem from './components/EditItem';
 
 const App = (props) => {
   const [currentUser, setcurrentUser] = useState(null);
@@ -57,6 +58,11 @@ const App = (props) => {
         {/* <Route exact path="/movies/:movieId" render={(props) => <Movie id={props.match.params.movieId} />} /> */}
         <Route exact path="/item-details/:itemId" render={(props) =>
           <ItemDetails
+            itemId={props.match.params.itemId}
+            currentUser={currentUser}
+          />} />
+        <Route exact path="/edit-item/:itemId" render={(props) =>
+          <EditItem
             itemId={props.match.params.itemId}
             currentUser={currentUser}
           />} />

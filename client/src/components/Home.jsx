@@ -6,7 +6,6 @@ import AddItem from './AddItem';
 
 export default function Home(props) {
   const handleRadio = (e) => {
-    // console.log(e.target.id)
   }
   return (
     <div class="tabs">

@@ -350,11 +350,41 @@ display: flex;
 #ymm,#ymm p{
   display: flex;
   font-family: 'Tomorrow', sans-serif;
-  font-size: 1.5em;
+  font-size: 1em;
   margin-right: 2px;
 }
 #listing-details-group{
   font-family: 'Tomorrow', sans-serif;
   font-size: 1.5em;
 }
+
+.im {
+  /* color: #888; */
+  cursor: pointer;
+  margin-left: 10px;
+  font-weight: normal;
+  margin-right: 10px;
+  color: yellow;
+}
 /* Listing Detials end */
+.edit-item-img-container{  
+  position: relative;
+  text-align: center;
+  color: black;
+  width: 100px;
+  height: 100px;
+  padding: 5px;
+}
+
+.delete-img{
+  position: absolute;
+  top: 20%;
+  left: 90%;
+  transform: translate(-50%, -50%);
+  font-size: 1.3em;
+  font-family: Arial, Helvetica, sans-serif;
+  cursor: pointer;
+}
+.delete-image-group{
+display: flex;
+}

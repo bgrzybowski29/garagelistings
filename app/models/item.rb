@@ -1,6 +1,6 @@
 class Item < ApplicationRecord
   belongs_to :user
-  belongs_to :savedItems
+  # belongs_to :savedItems
   has_many :savedItems
-  has_many :itemImages
+  has_many :itemImages, dependent: :destroy
 end

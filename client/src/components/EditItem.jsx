@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
-import { getAutoMakes, getAutoModels, getAutoYears, getAutoModelOptions, addItem } from '../services/api-helper';
+import { getItem, getAutoMakes, getAutoModels, getAutoYears, getAutoModelOptions, editItem, deleteImage, addItemImage } from '../services/api-helper';
 
-const AddItem = (props) => {
+const EditItem = (props) => {
 
   const [years, setYears] = useState(null);
   const [makes, setMakes] = useState(null);
@@ -12,41 +12,56 @@ const AddItem = (props) => {
   const [make, setMake] = useState(null);
   const [model, setModel] = useState(null);
   const [modelOption, setModelOption] = useState(null);
-  const [selection, setSelection] = useState(null);
   const [title, setTitle] = useState(null);
   const [description, setDescription] = useState(null);
   const [images, setImages] = useState([]);
   const [selectedImage, setSelectedImage] = useState('');
+  const [loading, setLoading] = useState(true);
 
 
   useEffect(() => {
-    getYears();
+    loadItem(props.itemId);
   }, []);
+
+  const loadItem = async (id) => {
+    const itemsResponse = await getItem(id);
+    setYear(itemsResponse.year);
+    setMake(itemsResponse.make);
+    setModel(itemsResponse.model);
+    setModelOption(itemsResponse.mptions);
+    getYears();
+    setMakes(<option>{itemsResponse.make}</option>);
+    setModels(<option>{itemsResponse.model}</option>);
+    setModelOptions(<option>{itemsResponse.mptions}</option>);
+    setTitle(itemsResponse.title);
+    setDescription(itemsResponse.description);
+    setImages(itemsResponse.itemImages);
+    setLoading(false);
+  }
 
   const clearMake = async () => {
     setMake(null);
     setMakes(null);
-    setSelection(null);
   }
   const clearModel = async () => {
     setModel(null);
     setModels(null);
-    setSelection(null);
   }
   const clearModelOption = async () => {
     setModelOption(null);
     setModelOptions(null);
-    setSelection(null);
   }
-
   const getYears = async () => {
     const autoYears = await getAutoYears();
-    clearMake();
-    clearModel();
-    clearModelOption();
-    setYears(autoYears.map(year => ((<option>{year.text}</option>))));
+    if (!loading) {
+      clearMake();
+      clearModel();
+      clearModelOption();
+    }
+    setYears(autoYears.map(y => ((<option>{y.text}</option>))));
   }
   const getMakes = async (event) => {
+    if (loading) return;
     setYear(event.target.value);
     clearMake();
     clearModel();
@@ -56,6 +71,7 @@ const AddItem = (props) => {
   }
 
   const getModels = async (event) => {
+    if (loading) return;
     setMake(event.target.value);
     clearModel();
     clearModelOption();
@@ -63,27 +79,33 @@ const AddItem = (props) => {
     setModels(autoModels.map(model => ((<option>{model.text}</option>))));
   }
   const getModelsOptions = async (event) => {
+    if (loading) return;
     setModel(event.target.value);
     clearModelOption();
     const autoModelsOptions = await getAutoModelOptions(year, make, event.target.value);
-
     autoModelsOptions.unshift({ text: '', value: '' });
     setModelOptions(autoModelsOptions.map(model => ((<option>{model.text}</option>))));
   }
 
-  const setAutomobile = async (event) => {
+  const setOptions = async (event) => {
+    if (loading) return;
     setModelOption(event.target.value)
   }
-  const addNewItem = async () => {
+  const editExistingItem = async () => {
     const image = images.pop();
-    const add = await addItem({ title: title, description: description, year: year, make: make, model: model, mptions: modelOption, default_image: image }, images);
-    props.history.push(`/item-details/${add.id}`);
+    const add = await editItem({ id: props.itemId, title: title, description: description, year: year, make: make, model: model, mptions: modelOption, default_image: image });
+    props.history.push("/")
   }
   const addNewImage = async (image) => {
-    let i = images;
-    i.push(image);
-    setImages(i);
+    const add = await addItemImage(props.itemId, image)
+    let im = images;
+    im.push(add);
+    setImages(im);
     setSelectedImage("");
+  }
+  const removeImage = async (id) => {
+    setImages(images.filter(img => img.id != id));
+    await deleteImage(id);
   }
 
   return (
@@ -94,19 +116,19 @@ const AddItem = (props) => {
         <label>Description</label>
         <textarea value={description} onChange={e => setDescription(e.target.value)} />
         <label>Year</label>
-        <select onChange={getMakes} name="year" type="text" placeholder="year">
+        <select value={year} onChange={getMakes} name="year" type="text" placeholder="year">
           {years}
         </select>
         <label>Make</label>
-        <select onChange={getModels} name="make" type="text" placeholder="make">
+        <select value={make} onChange={getModels} name="make" type="text" placeholder="make">
           {makes}
         </select>
         <label>Model</label>
-        <select onChange={getModelsOptions} name="model" type="text" placeholder="model">
+        <select value={model} onChange={getModelsOptions} name="model" type="text" placeholder="model">
           {models}
         </select>
         <label>Model Options</label>
-        <select onChange={setAutomobile} name="model" type="text" placeholder="model">
+        <select value={modelOption} onChange={setOptions} name="model" type="text" placeholder="model">
           {modelOptions}
         </select>
       </form>
@@ -119,14 +141,18 @@ const AddItem = (props) => {
             Add Image
           </button>
         </div>
-        <div>
-          {images.map(image => <img className="new-item-images" src={image} alt="none" />)}
+        <div className="delete-image-group">
+          {images.map(image => (
+            <div className="edit-item-img-container">
+              <img className="new-item-images" src={image.image_url} alt="none" />
+              <div onClick={() => { removeImage(image.id); }} className="delete-img">X</div>
+            </div>
+          ))}
         </div>
       </div>
-      <button id="add-new-item-btn" onClick={() => { addNewItem(); }} >Add</button>
-      <p>{selection}</p>
+      <button id="add-new-item-btn" onClick={() => { editExistingItem(); }} >Edit</button>
     </div>
   )
 }
 
-export default withRouter(AddItem);
+export default withRouter(EditItem);

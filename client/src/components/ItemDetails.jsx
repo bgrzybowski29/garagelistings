@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import altImage from '../images.png';
-import { getItem } from '../services/api-helper';
+import { getItem, deleteItem, saveItem, unSaveItem } from '../services/api-helper';
 
-export default function ItemDetails(props) {
+function ItemDetails(props) {
   const [listing, setListing] = useState(null);
   const [backGround, setbackGround] = useState(altImage);
   const [isOwner, setIsOwner] = useState(false);
+  const [isSaved, setIsSaved] = useState(false);
 
   let divStyle = { backgroundImage: `url(${backGround})` };
 
   useEffect(() => {
     loadItem(props.itemId);
+    // console.log(`UseEffect ran on ItemDetails`)
   }, []);
 
   const loadItem = async (id) => {
@@ -20,6 +22,22 @@ export default function ItemDetails(props) {
     setbackGround(itemsResponse.default_image)
     if (itemsResponse.user_id === props.currentUser.id)
       setIsOwner(true);
+    setIsSaved(itemsResponse.savedItems.find(item => props.currentUser.id === item.user_id) ? true : false);
+
+  }
+  const handleDelete = async (id) => {
+    await deleteItem(id);
+    props.history.push("/");
+  }
+  const handleSaveItem = async (id) => {
+    if (isSaved) {
+      await unSaveItem(id);
+      setIsSaved(false);
+    }
+    else {
+      await saveItem(id);
+      setIsSaved(true);
+    }
   }
 
   return (
@@ -37,7 +55,17 @@ export default function ItemDetails(props) {
             </div>
           </div>
           <div id="listing-details-group">
-            <h2>{listing.title}</h2>
+
+            <h2 id="title">{listing.title}</h2>
+            {isOwner ?
+              <></>
+              :
+
+              isSaved ?
+                <i class="im im-star" onClick={() => { handleSaveItem(listing.id); }}></i>
+                :
+                <i class="im im-star-o" onClick={() => { handleSaveItem(listing.id); }}></i>
+            }
             <p>{listing.description}</p>
             <p> Year, Make, Model</p>
             <div id="ymm"><p>{listing.year}</p>
@@ -49,13 +77,14 @@ export default function ItemDetails(props) {
             <p>Created on: {listing.created_at}</p>
             {isOwner &&
               <>
-                <button>Edit Listing</button>
-                <button>Delete Listing</button>
+                <Link to={`/edit-item/${listing.id}`}><button>Edit Listing</button></Link>
+                <button onClick={() => { handleDelete(listing.id); }}>Delete Listing</button>
               </>
             }
           </div>
         </div>
       }
-    </div>
+    </div >
   )
 }
+export default withRouter(ItemDetails);

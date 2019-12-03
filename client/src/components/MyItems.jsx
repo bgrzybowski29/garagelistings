@@ -29,7 +29,6 @@ export default function MyItems(props) {
             <p>{item.description}</p>
             <p>Posted by: {item.user.username}</p>
           </div>
-          {/* <p> {JSON.stringify(item)}</p> */}
         </div>
       ))}
     </div>

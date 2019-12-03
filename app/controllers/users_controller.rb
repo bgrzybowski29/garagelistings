@@ -50,11 +50,20 @@ def show_items
   @items=@user.itemsSaved
   render json: @items, include: :user, status: :ok
  end
- def add_favItem
 
+ def add_saved_Item
+    @item = @current_user.savedItems.new(item_id: params[:itemId])
+    if @item.save
+      render json: @item, status: :created
+    else
+      render json: @item.errors, status: :unprocessable_entity
+    end
  end
- def delete_favItem
 
+ def delete_saved_Item
+  puts "ben got here"
+  @current_user.savedItems.where(item_id: params[:itemId]).destroy_all
+  
  end
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -64,6 +73,6 @@ def show_items
 
     # Only allow a trusted parameter "white list" through.
     def user_params
-      params.require(:user).permit(:username, :email, :password)
+      params.require(:user).permit(:username, :email, :password,:itemId)
     end
 end
