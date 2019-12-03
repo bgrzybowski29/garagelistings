@@ -46,6 +46,10 @@ export const getAllItems = async () => {
   const resp = await api.get(`/items`);
   return resp.data
 }
+export const getItem = async (id) => {
+  const resp = await api.get(`/items/${id}`);
+  return resp.data
+}
 
 // https://www.fueleconomy.gov/ws/rest/vehicle/menu/year
 // https://www.fueleconomy.gov/ws/rest/vehicle/menu/make?year=2012
@@ -77,14 +81,4 @@ const addEmptyElement = (arr) => {
   }
   retArr.unshift({ text: '', value: '' });
   return retArr;
-}
-
-export const updateComment = async (id, data) => {
-  const resp = await api.put(`/comments/${id}`, { comment: data })
-  return resp.data
-}
-
-export const destroyComment = async (id) => {
-  const resp = await api.delete(`/comments/${id}`)
-  return resp.data
 }

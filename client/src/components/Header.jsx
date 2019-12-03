@@ -4,9 +4,16 @@ export default function Header(props) {
 
   return (
     <header>
-      <h1>garagelistings</h1>
+      {/* <h1>garagelistings</h1> */}
+      <Link to="/"><h1>garagelistings</h1></Link>
       <nav>
-        <Link to="/">Home</Link>
+        {
+          props.currentUser
+            ?
+            <h2>Welcome, {props.currentUser.name}!</h2>
+            :
+            <></>
+        }
         {
           !props.currentUser
             ?
@@ -15,14 +22,6 @@ export default function Header(props) {
             < Link to="/" onClick={props.handleLogout}>Logout</Link>
         }
       </nav>
-      {
-        props.currentUser
-          ?
-          <h2>Welcome, {props.currentUser.name}!</h2>
-          :
-          <></>
-      }
-
     </header >
   )
 }

@@ -8,6 +8,7 @@ import RegisterForm from './components/RegisterForm';
 import { withRouter } from 'react-router';
 import { verifyUser } from './services/api-helper';
 import Home from './components/Home';
+import ItemDetails from './components/ItemDetails';
 
 const App = (props) => {
   const [currentUser, setcurrentUser] = useState(null);
@@ -41,7 +42,7 @@ const App = (props) => {
       <main className="main">
         {
           currentUser ?
-            <Home currentUser={currentUser} />
+            <Route exact path="/" render={() => <Home currentUser={currentUser} />} />
             :
             <></>
         }
@@ -53,6 +54,12 @@ const App = (props) => {
           <RegisterForm
             setUser={setUser}
           />)} />
+        {/* <Route exact path="/movies/:movieId" render={(props) => <Movie id={props.match.params.movieId} />} /> */}
+        <Route exact path="/item-details/:itemId" render={(props) =>
+          <ItemDetails
+            itemId={props.match.params.itemId}
+            currentUser={currentUser}
+          />} />
       </main >
       <Footer />
     </div>

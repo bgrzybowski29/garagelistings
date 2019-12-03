@@ -43,12 +43,12 @@ class UsersController < ApplicationController
 
 def show_items
   @items=Item.where(user_id: params[:id])
-  render json: @items, status: :ok
+  render json: @items, include: :user, status: :ok
  end
  
  def show_saved_Items
   @items=@user.itemsSaved
-  render json: @items, status: :ok
+  render json: @items, include: :user, status: :ok
  end
  def add_favItem
 

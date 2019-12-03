@@ -1,10 +1,18 @@
 @import url("http://fonts.googleapis.com/css?family=Open+Sans:400,600,700");
 @import url("http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css");
+@import url("https://fonts.googleapis.com/css?family=Bebas+Neue|Tomorrow")
+
 *, *:before, *:after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+
+.clearfix:after {
+    content: "";
+    display: table;
+    clear: both;
+} 
 
 html,
 body,
@@ -21,21 +29,31 @@ body {
   display: flex;
   flex-direction: column;
 }
+nav{
+  align-self: center;
+}
+nav a{
+  font-family: 'Tomorrow', sans-serif;
+  font-size: 2em;
+  
+}
 header {
-  flex-shrink: 0;
-  display: grid;
-  display: inline-flex;
+  display: flex;
   background-color: lavenderblush;
   right:0;
   left:0;
   margin-top: 0;
 }
+header a{
+  text-decoration: none;
+}
 header h1{
-  width: 100vw;
+  width: 90vw;
   font-size: 4em;
   margin-top: 20px;
   margin-bottom: 20px;
   text-align: center;
+  color: black;
 }
 
 .main {
@@ -43,6 +61,7 @@ header h1{
   position: relative;
   display: flex;
   flex-direction: column;
+  background-color: cornflowerblue;
 }
 .add-item-comp{
   margin-left: 20px;
@@ -89,15 +108,6 @@ footer {
 }
 
 /* tabs start */
-/* .tabs {
-  min-width: 95%;
-  max-width: 95%;
-  margin: 0 auto;
-  background: #fff;
-  box-shadow: 1px 5px 5px 1px gray;
-  height: 95%;
-} */
-
 section {
   display: none;
   padding: 20px 0 0;
@@ -114,8 +124,10 @@ section {
   padding: 15px 25px;
   font-weight: 600;
   text-align: center;
-  color: #bbb;
+  color: white;
   border: 1px solid transparent;
+  font-family: 'Tomorrow', sans-serif;
+  font-size: 1.5em;
 }
 
 .tab-labels:before {
@@ -145,7 +157,7 @@ section {
 }
 
 .tab-inputs:checked + .tab-labels {
-  color: #555;
+  color: #ffb347;
   border: 1px solid #ddd;
   border-top: 2px solid orange;
   border-bottom: 1px solid #fff;
@@ -159,3 +171,190 @@ section {
 }
 
 /* tabs end */
+/* Login/register form start */
+
+.form-login {
+  display: flex;
+  flex-direction: column;
+  width: 370px;
+  margin: 60px auto 30px;
+  padding: 15px;
+  position: relative;
+  background: #fffaf6;
+  border-radius: 4px;
+  color: #7e7975;
+  box-shadow:
+      0 2px 2px rgba(0,0,0,0.2),        
+      0 1px 5px rgba(0,0,0,0.2),        
+      0 0 0 12px rgba(255,255,255,0.4); 
+}
+
+.form-login h1 {
+  font-size: 2em;
+  font-weight: bold;
+  color: #bdb5aa;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #EBE6E2;
+  text-shadow: 0 2px 0 rgba(255,255,255,0.8);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.8);
+  margin-bottom: 10px;
+}
+
+.form-login h1 .log-in,
+.form-login h1 .register{
+  display: inline-block;
+  text-transform: uppercase;
+}
+
+.form-login h1 .log-in {
+  color: #6c6763;
+  padding-right: 2px;
+}
+
+.form-login h1 .register{
+  color: #ffb347;
+  padding-left: 2px;
+}
+
+.form-login .float {
+  width: 95%;
+  float: left;
+  /* padding-top: 15px; */
+  border-top: 1px solid rgba(255,255,255,1);
+}
+
+.form-login .float:first-of-type {
+  padding-right: 5px;
+}
+
+.form-login .float:last-of-type {
+  padding-left: 5px;
+}
+
+.form-login label {
+  display: block;
+  padding: 0 0 5px 2px;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: 1em;
+}
+
+.form-login label i {
+  margin-right: 5px; /* Gap between icon and text */
+  display: inline-block;
+  width: 10px;
+}
+
+.form-login input[type=text],
+.form-login input[type=password],
+.form-login input[type=email] {
+  font-family: 'Lato', Calibri, Arial, sans-serif;
+  font-size: 1.2em;
+  font-weight: 400;
+  display: block;
+  width: 100%;
+  border: 3px solid #ebe6e2;
+  border-radius: 5px;
+  transition: all 0.3s ease-out;
+}
+
+.form-login input[type=text]:hover,
+.form-login input[type=password]:hover,
+.form-login input[type=email]:hover {
+  border-color: #CCC;
+}
+
+.form-login label:hover ~ input {
+  border-color: #CCC;
+}
+
+.form-login input[type=text]:focus,
+.form-login input[type=email]:focus,
+.form-login input[type=password]:focus {
+  border-color: #BBB;
+  outline: none;
+}
+
+.form-login input[type=submit]{
+  width: 50%;
+  height: 38px;
+  float: left;
+  position: relative;
+  box-shadow: inset 0 1px rgba(255,255,255,0.3);
+  border-radius: 3px;
+  cursor: pointer;
+  font-family: 'Lato', Calibri, Arial, sans-serif;
+  font-size: 1.4em;
+  line-height: 38px;
+  text-align: center;
+  font-weight: bold;
+  margin-left: 1%;
+  background: #fbd568; 
+  background: linear-gradient(#fbd568, #ffb347);
+  border: 1px solid #f4ab4c;
+  color: #996319;
+  text-shadow: 0 1px rgba(255,255,255,0.3);
+}
+
+.form-login input[type=submit]:hover{
+  box-shadow: 
+      inset 0 1px rgba(255,255,255,0.3), 
+      inset 0 20px 40px rgba(255,255,255,0.15);
+}
+
+.form-login input[type=submit]:active{
+  top: 1px;
+}
+.clearfix .register{
+  margin-left: 30px;
+  text-decoration: none;
+  font-size: 2em;
+  font-weight: bold;
+  color: #bdb5aa;
+  text-shadow: 0 2px 0 rgba(255,255,255,0.8);
+}
+.clearfix a{
+  text-decoration: none;
+}
+/* Login/register form end */
+/* LISTINGS START */
+.listing-image{
+  width: 180px;
+}
+/* LISTINGS END */
+/* Listing Detials start */
+.listing-row{
+  display: flex;
+}
+#main-pic{
+  width: 50vw;
+  height: 60vh;
+  background-size: contain;
+  margin-bottom: 1vh;
+  background-repeat: no-repeat;
+}
+.listing-pics{
+display: flex;
+}
+.listing-pic{
+width: 80px;
+margin-left: 10px;
+}
+#listing-image-group{
+  display: flex;
+  flex-direction: column;
+}
+#listing-details{
+display: flex;
+}
+#ymm,#ymm p{
+  display: flex;
+  font-family: 'Tomorrow', sans-serif;
+  font-size: 1.5em;
+  margin-right: 2px;
+}
+#listing-details-group{
+  font-family: 'Tomorrow', sans-serif;
+  font-size: 1.5em;
+}
+/* Listing Detials end */

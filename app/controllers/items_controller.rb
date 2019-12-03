@@ -4,13 +4,12 @@ class ItemsController < ApplicationController
   # GET /items
   def index
     @items = Item.all
-
-    render json: @items
+    render json: @items, include: :user
   end
 
   # GET /items/1
   def show
-    render json: @item
+    render json: @item, include: [:user, :itemImages]
   end
 
   # POST /items

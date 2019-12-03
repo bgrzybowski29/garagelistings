@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { registerUser } from '../services/api-helper';
 
 const RegisterForm = (props) => {
@@ -21,17 +22,27 @@ const RegisterForm = (props) => {
 
   return (
     <>
-      <form onSubmit={(e) => {
+      <form className="form-login" onSubmit={(e) => {
         e.preventDefault();
         handleRegister(username, email, password);
       }} >
-        <label>Username</label>
-        <input type='text' value={username} onChange={e => setUsername(e.target.value)} />
-        <label>Email</label>
-        <input type='text' value={email} onChange={e => setEmail(e.target.value)} />
-        <label>Password</label>
-        <input type='password' value={password} onChange={e => setPassword(e.target.value)} />
-        <button>Register</button>
+        <h1><span className="log-in">Log in</span> or <span className="register">register</span></h1>
+        <p className="float">
+          <label for="login">Username</label>
+          <input type='text' value={username} onChange={e => setUsername(e.target.value)} placeholder="Username" />
+        </p>
+        <p className="float">
+          <label for="email">Email</label>
+          <input type='email' value={email} onChange={e => setEmail(e.target.value)} placeholder="Email" />
+        </p>
+        <p className="float">
+          <label for="password">Password</label>
+          <input type='password' value={password} onChange={e => setPassword(e.target.value)} placeholder="Password" className="showpassword" />
+        </p>
+        <p className="clearfix">
+          <input type="submit" name="submit" value="Register" />
+          <Link to="/login"><span className="register">login</span></Link>
+        </p>
       </form>
       <br />
       <p>{errorMessage}</p>
