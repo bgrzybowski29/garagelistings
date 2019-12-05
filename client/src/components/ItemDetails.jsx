@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import altImage from '../images.png';
 import { getItem, deleteItem, saveItem, unSaveItem } from '../services/api-helper';
+import moment from 'moment';
+import { Badge, OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 function ItemDetails(props) {
   const [listing, setListing] = useState(null);
@@ -13,7 +15,6 @@ function ItemDetails(props) {
 
   useEffect(() => {
     loadItem(props.itemId);
-    // console.log(`UseEffect ran on ItemDetails`)
   }, []);
 
   const loadItem = async (id) => {
@@ -44,9 +45,11 @@ function ItemDetails(props) {
     <div id="listing-details">
 
       {listing &&
-        <div className="listing-row">
+        <>
           <div id="listing-image-group">
-            <div id="main-pic" style={divStyle} />
+            {/* <div id="main-pic" style={divStyle} /> */}
+              <img id="main-pic" src={backGround} alt=""/>
+            
             <div className="listing-pics">
               <img className="listing-pic" src={listing.default_image} alt={altImage} onClick={() => setbackGround(listing.default_image)} />
               {listing.itemImages.map(image => (
@@ -56,25 +59,43 @@ function ItemDetails(props) {
           </div>
           <div id="listing-details-group">
 
-            <h2 id="title">{listing.title}</h2>
-            {isOwner ?
-              <></>
-              :
+            <h1 id="title">{listing.title}
+              <OverlayTrigger
+                placement="top"
+                delay={{ show: 250, hide: 400 }}
+                overlay={<Tooltip>Listing is less than 4 days old!</Tooltip>}
+              >
+                {
+                  moment(Date.now()).diff(new Date(listing.created_at), "days") < 4 ?
+                    <Badge variant="secondary">New</Badge> : <></>
+                }</OverlayTrigger>
+              <OverlayTrigger
+                placement="right"
+                delay={{ show: 250, hide: 400 }}
+                overlay={<Tooltip>Save\Unsave listing!</Tooltip>}
+              >
+                {isOwner ?
+                  <></>
+                  :
 
-              isSaved ?
-                <i class="im im-star" onClick={() => { handleSaveItem(listing.id); }}></i>
-                :
-                <i class="im im-star-o" onClick={() => { handleSaveItem(listing.id); }}></i>
-            }
+                  isSaved ?
+                    <i class="im im-star" onClick={() => { handleSaveItem(listing.id); }}></i>
+                    :
+                    <i class="im im-star-o" onClick={() => { handleSaveItem(listing.id); }}></i>
+                }</OverlayTrigger></h1>
             <p>{listing.description}</p>
-            <p> Year, Make, Model</p>
+            {/* <p> Year, Make, Model</p> */}
             <div id="ymm"><p>{listing.year}</p>
               <p>{listing.make}</p>
               <p>{listing.model}</p>
               <p>{listing.mptions}</p>
             </div>
-            <p>Posted by: {listing.user.username}</p>
-            <p>Created on: {listing.created_at}</p>
+            <p>${parseFloat(listing.price).toFixed(2)}</p>
+            <div id="grp-details-small">
+              <p>Posted by: {listing.user.username}</p>
+              <p>Age: {listing.timedistance}</p>
+              <p>Created on: {moment(new Date(listing.created_at)).format("ddd MM/DD/YYYY hh:mm A")}</p>
+            </div>
             {isOwner &&
               <>
                 <Link to={`/edit-item/${listing.id}`}><button>Edit Listing</button></Link>
@@ -82,7 +103,7 @@ function ItemDetails(props) {
               </>
             }
           </div>
-        </div>
+        </>
       }
     </div >
   )

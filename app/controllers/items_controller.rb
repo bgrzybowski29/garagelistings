@@ -1,15 +1,22 @@
 class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :update, :destroy]
   before_action :authorize_request, only: :create
+  include ActionView::Helpers::DateHelper
 
   # GET /items
   def index
     @items = Item.all
-    render json: @items, include: :user
+     @items=@items.map do |item|
+      item.timedistance =  distance_of_time_in_words(item.created_at, Time.now)
+      item
+     end
+
+      render json: @items, include: :user
   end
 
   # GET /items/1
   def show
+    @item.timedistance =  distance_of_time_in_words(@item.created_at, Time.now)
     render json: @item, include: [:user, :itemImages, :savedItems]
   end
 
@@ -53,6 +60,6 @@ class ItemsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def item_params
-      params.require(:item).permit(:title, :description, :make, :model, :mptions, :year, :user_id, :default_image)
+      params.require(:item).permit(:title, :description,:price, :make, :model, :mptions, :year, :user_id, :default_image)
     end
 end

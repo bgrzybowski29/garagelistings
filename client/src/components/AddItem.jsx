@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 import { getAutoMakes, getAutoModels, getAutoYears, getAutoModelOptions, addItem } from '../services/api-helper';
+import { InputGroup, FormControl, Button } from 'react-bootstrap';
 
 const AddItem = (props) => {
 
@@ -17,6 +18,7 @@ const AddItem = (props) => {
   const [description, setDescription] = useState(null);
   const [images, setImages] = useState([]);
   const [selectedImage, setSelectedImage] = useState('');
+  const [price, setPrice] = useState('');
 
 
   useEffect(() => {
@@ -76,7 +78,7 @@ const AddItem = (props) => {
   }
   const addNewItem = async () => {
     const image = images.pop();
-    const add = await addItem({ title: title, description: description, year: year, make: make, model: model, mptions: modelOption, default_image: image }, images);
+    const add = await addItem({ title: title, description: description, price: price, year: year, make: make, model: model, mptions: modelOption, default_image: image }, images);
     props.history.push(`/item-details/${add.id}`);
   }
   const addNewImage = async (image) => {
@@ -93,6 +95,15 @@ const AddItem = (props) => {
         <input type='text' value={title} onChange={e => setTitle(e.target.value)} />
         <label>Description</label>
         <textarea value={description} onChange={e => setDescription(e.target.value)} />
+        <InputGroup className="mb-3">
+          <InputGroup.Prepend>
+            <InputGroup.Text>$</InputGroup.Text>
+          </InputGroup.Prepend>
+          <FormControl aria-label="Amount" onChange={e => setPrice(e.target.value)} />
+          <InputGroup.Append>
+            <InputGroup.Text>.00</InputGroup.Text>
+          </InputGroup.Append>
+        </InputGroup>
         <label>Year</label>
         <select onChange={getMakes} name="year" type="text" placeholder="year">
           {years}
@@ -111,14 +122,18 @@ const AddItem = (props) => {
         </select>
       </form>
       <div className="image-list">
-        <div>
-          <input id="selected-image-text" type='text' value={selectedImage} onChange={e => setSelectedImage(e.target.value)} />
-          <button id="selected-image-btn" onClick={() => {
-            addNewImage(selectedImage);
-          }}>
-            Add Image
-          </button>
-        </div>
+        <InputGroup className="mb-3">
+          <FormControl
+            placeholder="Add Image"
+            aria-label="Add Image"
+            aria-describedby="basic-addon2"
+            value={selectedImage}
+            onChange={e => setSelectedImage(e.target.value)}
+          />
+          <InputGroup.Append>
+            <Button variant="outline-secondary" onClick={() => { addNewImage(selectedImage); }}>Add</Button>
+          </InputGroup.Append>
+        </InputGroup>
         <div>
           {images.map(image => <img className="new-item-images" src={image} alt="none" />)}
         </div>

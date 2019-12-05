@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 # users=User.all
 
-puts 'running seed'
+# puts 'running seed'
 users=User.create([
   {
     username: "ben",

@@ -15,13 +15,14 @@ const App = (props) => {
   const [currentUser, setcurrentUser] = useState(null);
 
   const setUser = (user) => {
-    setcurrentUser({ id: user.id, name: user.username, email: user.email });
+    setcurrentUser(user);
     props.history.push("/")
   }
 
   const handleLogout = () => {
     setcurrentUser(null);
     localStorage.removeItem('authToken');
+    props.history.push("/login");
   }
   const verify = async () => {
     const currentUser = await verifyUser();
@@ -31,6 +32,7 @@ const App = (props) => {
   }
   useEffect(() => {
     verify();
+    if (!currentUser) props.history.push("/login");
   }, []);
 
 

@@ -1,25 +1,29 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-export default function Header(props) {
+import { DropdownButton, Dropdown, Button } from 'react-bootstrap';
 
+export default function Header(props) {
   return (
     <header>
-      {/* <h1>garagelistings</h1> */}
-      <Link to="/"><h1>garagelistings</h1></Link>
+      <Link to="/"><p id="app-title"><span id="title1">Garage</span> <span id="title2">Listings</span></p></Link>
+      <p id="vr"/>
+      <p id="sub-title">Your source for everything auto clasifieds.</p>
       <nav>
         {
           props.currentUser
             ?
-            <h2>Welcome, {props.currentUser.name}!</h2>
+            <>
+              <i class="im im-user-circle"></i>
+              <DropdownButton
+                alignRight
+                title={props.currentUser.firstname}
+                id="dropdown-menu-align-right">
+                <Dropdown.Item disabled eventKey="1">View Profile</Dropdown.Item>
+                <Dropdown.Item eventKey="2" onClick={props.handleLogout}>Logout</Dropdown.Item>
+              </DropdownButton>
+            </>
             :
-            <></>
-        }
-        {
-          !props.currentUser
-            ?
-            < Link to="/login">Login</Link>
-            :
-            < Link to="/" onClick={props.handleLogout}>Logout</Link>
+            <Link to="/login"><Button variant="primary">Login</Button></Link>
         }
       </nav>
     </header >

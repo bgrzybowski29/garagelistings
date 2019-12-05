@@ -61,7 +61,6 @@ def show_items
  end
 
  def delete_saved_Item
-  puts "ben got here"
   @current_user.savedItems.where(item_id: params[:itemId]).destroy_all
   
  end
@@ -73,6 +72,6 @@ def show_items
 
     # Only allow a trusted parameter "white list" through.
     def user_params
-      params.require(:user).permit(:username, :email, :password,:itemId)
+      params.require(:user).permit(:username, :email, :password, :itemId, :firstname, :lastname, :location)
     end
 end

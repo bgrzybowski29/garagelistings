@@ -1,6 +1,7 @@
 @import url("http://fonts.googleapis.com/css?family=Open+Sans:400,600,700");
 @import url("http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css");
-@import url("https://fonts.googleapis.com/css?family=Bebas+Neue|Tomorrow")
+@import url("https://fonts.googleapis.com/css?family=Bebas+Neue|Tomorrow");
+@import url("https://fonts.googleapis.com/css?family=Anton");
 
 *, *:before, *:after {
   margin: 0;
@@ -19,9 +20,9 @@ body,
 .app {
   height: 100vh; 
 }
-p {
+/* p {
   margin-bottom: 1em;
-}
+} */
 body {
   margin: 0;
 }
@@ -38,22 +39,49 @@ nav a{
   
 }
 header {
-  display: flex;
-  background-color: lavenderblush;
+  display: grid;
+  grid-template-columns: 42% 3% 45% 10%;
   right:0;
   left:0;
   margin-top: 0;
 }
+#title1{
+  color: black;
+}
+#title2{
+  color: Red; 
+  margin-left: 3px;
+
+}
+#sub-title{
+  color: black;
+  align-self: center;
+  margin-left: 10px;
+  font-size: 2w;
+}
+#vr{
+  /* border-right-color: black; */
+  border-right-width: 5px;
+  padding-right: 10px;
+  border-right: solid black;
+  height: 55%;
+  margin-top: 60%;
+}
+
 header a{
   text-decoration: none;
+  font-family: 'Anton', sans-serif;
+  font-weight: bold;
 }
-header h1{
-  width: 90vw;
-  font-size: 4em;
+header a:hover{
+  text-decoration: none;
+}
+#app-title{
+  display:flex;
+  width: 30vw;
+  font-size: 5vw;
   margin-top: 20px;
   margin-bottom: 20px;
-  text-align: center;
-  color: black;
 }
 
 .main {
@@ -61,10 +89,22 @@ header h1{
   position: relative;
   display: flex;
   flex-direction: column;
-  background-color: cornflowerblue;
+  background-color: white;
 }
 .add-item-comp{
-  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  width: 45vw;
+  margin: 10px auto 30px;
+  padding: 15px;
+  position: relative;
+  background: #fffaf6;
+  border-radius: 4px;
+  color: #7e7975;
+  box-shadow:
+      0 2px 2px rgba(0,0,0,0.2),        
+      0 1px 5px rgba(0,0,0,0.2),        
+      0 0 0 12px rgba(255,255,255,0.4);
 }
 
 .add-item-form{
@@ -99,12 +139,20 @@ header h1{
 footer {
   flex: 0 0 auto;
   padding-top: 20px;
-  background-color: lavenderblush;
+  background-color: lightgrey;
   text-align: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url('https://www.americanmicroinc.com/skin/american_micro_skin/images/page_banner_automotive.jpg');
 }
 #copyright{
   text-align: center;
-  color: black;
+  color: white;
+}
+.im-linkedin, .im-github{
+  color: white;
+  font-size: 3em;
+  margin-right: 10px;
 }
 
 /* tabs start */
@@ -124,7 +172,7 @@ section {
   padding: 15px 25px;
   font-weight: 600;
   text-align: center;
-  color: white;
+  color: silver;
   border: 1px solid transparent;
   font-family: 'Tomorrow', sans-serif;
   font-size: 1.5em;
@@ -137,15 +185,15 @@ section {
 }
 
 .tab-labels[for*='1']:before {
-  content: '\f007';
+  content: '\f00b';
 }
 
 .tab-labels[for*='2']:before {
-  content: '\f02e';
+  content: '\f007';
 }
 
 .tab-labels[for*='3']:before {
-  content: '\f00b';
+  content: '\f02e';
 }
 .tab-labels[for*='4']:before {
   content: '\f067';
@@ -157,9 +205,9 @@ section {
 }
 
 .tab-inputs:checked + .tab-labels {
-  color: #ffb347;
+  color: black;
   border: 1px solid #ddd;
-  border-top: 2px solid orange;
+  border-top: 2px solid black;
   border-bottom: 1px solid #fff;
 }
 
@@ -176,7 +224,7 @@ section {
 .form-login {
   display: flex;
   flex-direction: column;
-  width: 370px;
+  width: 50vw;
   margin: 60px auto 30px;
   padding: 15px;
   position: relative;
@@ -192,6 +240,7 @@ section {
 .form-login h1 {
   font-size: 2em;
   font-weight: bold;
+  text-align: center;
   color: #bdb5aa;
   padding-bottom: 8px;
   border-bottom: 1px solid #EBE6E2;
@@ -305,6 +354,10 @@ section {
 .form-login input[type=submit]:active{
   top: 1px;
 }
+.clearfix{
+  align-self: center;
+  display: flex;
+}
 .clearfix .register{
   margin-left: 30px;
   text-decoration: none;
@@ -319,7 +372,9 @@ section {
 /* Login/register form end */
 /* LISTINGS START */
 .listing-image{
-  width: 180px;
+  width: 150px;
+  height: 100%;
+  object-fit: cover;
 }
 /* LISTINGS END */
 /* Listing Detials start */
@@ -327,14 +382,19 @@ section {
   display: flex;
 }
 #main-pic{
-  width: 50vw;
-  height: 60vh;
+  width: 35vw;
+  height: 45vh;
   background-size: contain;
   margin-bottom: 1vh;
   background-repeat: no-repeat;
+  margin-left: 3vw;
+  margin-left: 3vw;
+  margin-top: 30px;
+  border: 5px solid black;
 }
 .listing-pics{
 display: flex;
+margin-left: 3vw
 }
 .listing-pic{
 width: 80px;
@@ -343,6 +403,7 @@ margin-left: 10px;
 #listing-image-group{
   display: flex;
   flex-direction: column;
+  margin-left: 10px;
 }
 #listing-details{
 display: flex;
@@ -356,15 +417,26 @@ display: flex;
 #listing-details-group{
   font-family: 'Tomorrow', sans-serif;
   font-size: 1.5em;
+  margin-top: 20px;
+  padding-left: 2vw;
+  width: 50vw;
+  
 }
-
-.im {
+#grp-details-small{
+  font-size: .5em;
+}
+#listing-details-group button{
+  margin-right: 10px;
+  background-color: #007BFF;
+}
+.im-star, .im-star-o {
   /* color: #888; */
   cursor: pointer;
   margin-left: 10px;
   font-weight: normal;
   margin-right: 10px;
-  color: yellow;
+  color: red;
+  font-size: 2em;
 }
 /* Listing Detials end */
 .edit-item-img-container{  
@@ -387,4 +459,29 @@ display: flex;
 }
 .delete-image-group{
 display: flex;
+}
+hr{
+  border: 1px solid black;
+  width: 94vw;
+}
+.listing-row{
+  margin-left: 3vw;
+  margin-top: 2vh;
+  display: grid;
+  height: 20vh;
+  grid-template-columns: 25% 60% 15%;
+}
+#title{
+color: black;
+}
+.badge{
+  margin-left: 10px;
+}
+.im-user-circle{
+  font-size: 3.5em;
+  color:black;
+}
+#dropdown-menu-align-right{
+  color: white;
+  background-color: black;
 }

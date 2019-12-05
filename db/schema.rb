@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_02_202438) do
+ActiveRecord::Schema.define(version: 2019_12_05_021554) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 2019_12_02_202438) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.text "default_image"
+    t.decimal "price"
     t.index ["user_id"], name: "index_items_on_user_id"
   end
 
@@ -52,6 +53,9 @@ ActiveRecord::Schema.define(version: 2019_12_02_202438) do
     t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "firstname"
+    t.string "lastname"
+    t.string "location"
   end
 
   add_foreign_key "item_images", "items"
