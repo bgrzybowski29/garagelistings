@@ -57,7 +57,6 @@ const App = (props) => {
           <RegisterForm
             setUser={setUser}
           />)} />
-        {/* <Route exact path="/movies/:movieId" render={(props) => <Movie id={props.match.params.movieId} />} /> */}
         <Route exact path="/item-details/:itemId" render={(props) =>
           <ItemDetails
             itemId={props.match.params.itemId}

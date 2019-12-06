@@ -23,7 +23,6 @@ class ItemsController < ApplicationController
   # POST /items
   def create
     @item = @current_user.items.new(item_params)
-    puts @item.default_image
     if @item.save
       render json: @item, status: :created, location: @item
     else
@@ -36,7 +35,6 @@ class ItemsController < ApplicationController
     if @item.update(item_params)
       render json: @item
     else
-      puts @item.errors.full_messages
       render json: @item.errors, status: :unprocessable_entity
     end
   end
@@ -45,7 +43,6 @@ class ItemsController < ApplicationController
   def destroy
     @item.itemImages.destroy
     @item.destroy
-    puts @item.errors.full_messages
   end
 
   def show_images

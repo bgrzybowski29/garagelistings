@@ -40,7 +40,7 @@ nav a{
 }
 header {
   display: grid;
-  grid-template-columns: 42% 3% 45% 10%;
+  grid-template-columns: 32% 3% 55% 10%;
   right:0;
   left:0;
   margin-top: 0;
@@ -81,6 +81,7 @@ header a:hover{
   width: 30vw;
   font-size: 5vw;
   margin-top: 20px;
+  margin-left: 20px;
   margin-bottom: 20px;
 }
 
@@ -94,7 +95,7 @@ header a:hover{
 .add-item-comp{
   display: flex;
   flex-direction: column;
-  width: 45vw;
+  width: 33vw;
   margin: 10px auto 30px;
   padding: 15px;
   position: relative;
@@ -484,4 +485,7 @@ color: black;
 #dropdown-menu-align-right{
   color: white;
   background-color: black;
+}
+.listing-details-group-ud{
+  color: white;
 }

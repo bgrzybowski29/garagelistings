@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import altImage from '../images.png';
-import { getItem, deleteItem, saveItem, unSaveItem } from '../services/api-helper';
+import { getItem, deleteItem, saveItem, unSaveItem, getSellerProfile } from '../services/api-helper';
 import moment from 'moment';
-import { Badge, OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { Badge, OverlayTrigger, Tooltip, Popover, Button } from 'react-bootstrap';
 
 function ItemDetails(props) {
   const [listing, setListing] = useState(null);
   const [backGround, setbackGround] = useState(altImage);
   const [isOwner, setIsOwner] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
+  const [showHide, setshowHide] = useState("Show Seller");
+  const [shown, setShown] = useState(true);
+  const [sellerProfile, setSellerProfile] = useState(true);
 
-  let divStyle = { backgroundImage: `url(${backGround})` };
 
   useEffect(() => {
     loadItem(props.itemId);
@@ -20,11 +22,15 @@ function ItemDetails(props) {
   const loadItem = async (id) => {
     const itemsResponse = await getItem(id);
     setListing(itemsResponse);
-    setbackGround(itemsResponse.default_image)
-    if (itemsResponse.user_id === props.currentUser.id)
+    setbackGround(itemsResponse.default_image);
+    if (itemsResponse.user_id === props.currentUser.id) {
       setIsOwner(true);
+      setSellerProfile(itemsResponse.currentUser);
+    }
+    else {
+      handleGetSellerProfile(itemsResponse.user_id);
+    }
     setIsSaved(itemsResponse.savedItems.find(item => props.currentUser.id === item.user_id) ? true : false);
-
   }
   const handleDelete = async (id) => {
     await deleteItem(id);
@@ -40,7 +46,37 @@ function ItemDetails(props) {
       setIsSaved(true);
     }
   }
+  const handleGetSellerProfile = async (id) => {
+    const profile = await getSellerProfile(id);
+    setSellerProfile(profile);
+  }
 
+  const popover = (
+    <Popover id="popover-basic">
+      <Popover.Title as="h3">Seller's Info</Popover.Title>
+      <Popover.Content>
+        {sellerProfile &&
+          <>
+            <p>Username: {sellerProfile.username}</p>
+            <p>Email: {sellerProfile.email}</p>
+            <p>User Since: {moment(new Date(sellerProfile.created_at)).format("MM/YYYY")}</p>
+            <p>Name: {sellerProfile.firstname} {sellerProfile.lastname}</p>
+            <p>Location: {sellerProfile.location}</p>
+          </>
+        }
+      </Popover.Content>
+    </Popover>
+  );
+  const handleShowHide = () => {
+    if (shown) {
+      setshowHide("Hide Seller");
+      setShown(false);
+    }
+    else {
+      setshowHide("Show Seller");
+      setShown(true);
+    }
+  }
   return (
     <div id="listing-details">
 
@@ -48,8 +84,8 @@ function ItemDetails(props) {
         <>
           <div id="listing-image-group">
             {/* <div id="main-pic" style={divStyle} /> */}
-              <img id="main-pic" src={backGround} alt=""/>
-            
+            <img id="main-pic" src={backGround} alt="" />
+
             <div className="listing-pics">
               <img className="listing-pic" src={listing.default_image} alt={altImage} onClick={() => setbackGround(listing.default_image)} />
               {listing.itemImages.map(image => (
@@ -92,14 +128,19 @@ function ItemDetails(props) {
             </div>
             <p>${parseFloat(listing.price).toFixed(2)}</p>
             <div id="grp-details-small">
-              <p>Posted by: {listing.user.username}</p>
+              {/* <p>Posted by: {listing.user.username}</p> */}
+              <OverlayTrigger trigger="click" placement="right" overlay={popover}>
+                <Button variant="success" onClick={() => handleShowHide()}>{showHide}</Button>
+              </OverlayTrigger>
               <p>Age: {listing.timedistance}</p>
               <p>Created on: {moment(new Date(listing.created_at)).format("ddd MM/DD/YYYY hh:mm A")}</p>
             </div>
             {isOwner &&
               <>
-                <Link to={`/edit-item/${listing.id}`}><button>Edit Listing</button></Link>
-                <button onClick={() => { handleDelete(listing.id); }}>Delete Listing</button>
+                <Link to={`/edit-item/${listing.id}`}>
+                  <Button variant="success">Edit Listing</Button>
+                </Link>
+                <Button variant="success" onClick={() => { handleDelete(listing.id); }}>Delete Listing</Button>
               </>
             }
           </div>

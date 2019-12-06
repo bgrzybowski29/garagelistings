@@ -34,6 +34,10 @@ export const verifyUser = async () => {
   }
   return false
 }
+export const getSellerProfile = async (user) => {
+  const resp = await api.get(`/users/${user}`);
+  return resp.data
+}
 export const getMyItems = async (user) => {
   const resp = await api.get(`/users/${user}/items`);
   return resp.data

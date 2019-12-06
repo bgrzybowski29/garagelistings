@@ -42,7 +42,7 @@ export default function AllItems(props) {
               </Link>
               <p>{item.description}</p>
               <p>${parseFloat(item.price).toFixed(2)}</p>
-              <p>Location: {props.currentUser.location}</p>
+              <p>Location: {item.user.location}</p>
             </div>
             <div>
               <p>ID: {item.id}</p>
