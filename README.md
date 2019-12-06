@@ -58,16 +58,17 @@ TBD
 
 
 #### Functional Components
+* Login
+* Register
 * Header
 	* Home
-		* Login
-		* Register
-		* MyListings
-		* SavedListings
-		* AllListings
-		* CreateListing
-		* ViewListing 
-		* News  
+		* MyItems
+		* SavedItems
+		* AllItems
+		* AddItem
+		* EditItem
+		* ItemDetails 
+		* ProfileDetailsModal 
 * Footer
 
 ### Component	Description
@@ -76,11 +77,13 @@ TBD
 **Home** - This will render the Form and main.   
 **Login** - This will render the login form.  
 **Register** - This will render the registration form.   
-**MyListings** - This will render listings the current user created.   
-**SavedListings** - This will render the listing the user has saved\favorite.   
+**MyItems** - This will render listings the current user created.   
+**SavedItems** - This will render the listing the user has saved\favorite.   
 **AllListings** - This will render all listings.
 **CreateListing** - This will render the create listing form.   
-**ViewListing** - This will render listing details.
+**EditItem** - This will render the edit listing form.   
+**ItemDetails** - This will render listing details.
+**ProfileDetailsModal** - This will render current user profile as a modal.
 
 ### Routes
 ![](routes.png)
@@ -88,36 +91,22 @@ TBD
 ### Timeframes
 Component  | Priority | Estimated Time | Time Invetsted
 ---------- | -------- | -------------- | --------------
-Header  | Low | 1 hr  | 0 hrs
-Footer | Low | 1 hr |  0 hrs
-Home | Med | 8 hrs | 0 hr
-Login | High | 1.5 hrs | 0 hrs
-Register | Low | 1.5 hrs | 0 hrs
-MyListings | High | 2 hrs | 0 hrs
-SavedListings | High | 2 hrs | 0 hr
-AllListings | High | 4 hrs | 0 hr
-CreateListing | Med | 4 hrs | 0 hr
-ViewListing | Med | 4 hrs | 0 hr
-App.js | High | 10hrs | 0 hrs
+Header  | Low | 1 hr  | 1 hrs
+Footer | Low | 1 hr |  .5 hrs
+Home | Med | 8 hrs | .5 hr
+Login | High | 1.5 hrs | 1 hrs
+Register | Low | 1.5 hrs | 1 hrs
+MyListings | High | 2 hrs | 8 hrs
+SavedListings | High | 2 hrs | 0.25 hr
+AllListings | High | 4 hrs | 0.25 hr
+CreateListing | Med | 4 hrs | 4 hr
+ViewListing | Med | 4 hrs | 4 hr
+App.js | High | 10hrs | 4 hrs
 
 ### Issues and Resolutions   
-
-
-
-
-`/auth/login` loginUser
-`/users/` registerUser
-`/auth/verify`  verifyUser
-`/users/${user}` getSellerProfile
-`/users/${user}/items` getMyItems
-`/users/${user}/savedItems` getSavedItems
-`/items`  getAllItems
-`/items/${id}`  getItem
-`/items`, data  addItem
-`/item_images`  addItemImage
-`/items/${data.id}` editItem
-`/items/${id}`  deleteItem
-`/item_images/${id}`  deleteImage
- `users/savedItems/${id}` saveItem
-`users/savedItems/${id}`  unSaveItem
- 
+-ability to add a virtual attribute to a model. Attribute was used to calculate distance in time from created date. 
+  - resolved the serialization issue with this code in the items model:
+  attr_accessor :timedistance
+  def attributes
+    super.merge({'timedistance' => timedistance})
+  end
