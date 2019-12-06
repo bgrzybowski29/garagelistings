@@ -104,3 +104,20 @@ App.js | High | 10hrs | 0 hrs
 
 
 
+
+`/auth/login` loginUser
+`/users/` registerUser
+`/auth/verify`  verifyUser
+`/users/${user}` getSellerProfile
+`/users/${user}/items` getMyItems
+`/users/${user}/savedItems` getSavedItems
+`/items`  getAllItems
+`/items/${id}`  getItem
+`/items`, data  addItem
+`/item_images`  addItemImage
+`/items/${data.id}` editItem
+`/items/${id}`  deleteItem
+`/item_images/${id}`  deleteImage
+ `users/savedItems/${id}` saveItem
+`users/savedItems/${id}`  unSaveItem
+ 
