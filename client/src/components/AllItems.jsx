@@ -19,13 +19,14 @@ export default function AllItems(props) {
 
   return (
     <div>
+      <div className="mobile-header">All Listings</div>
       {items && items.map(item => (
         <>
           <div className="listing-row">
             <Link to={`/item-details/${item.id}`}>
               <img className="listing-image" src={item.default_image} alt={altImage} />
             </Link>
-            <div classname="listing-row-details">
+            <div className="listing-row-details">
               <Link to={`/item-details/${item.id}`}>
                 <h2 className="title">{item.title}
                   <OverlayTrigger

@@ -91,11 +91,12 @@ header a:hover{
   display: flex;
   flex-direction: column;
   background-color: white;
+  overflow-y: scroll;
 }
 .add-item-comp{
   display: flex;
   flex-direction: column;
-  width: 33vw;
+  width: 45vw;
   margin: 10px auto 30px;
   padding: 15px;
   position: relative;
@@ -111,13 +112,13 @@ header a:hover{
 .add-item-form{
   display: flex;
   flex-direction: column;
-  width: 500px;
+  width: 40vw;
 }
 .add-item-form input, .add-item-form textarea, .add-item-form select{
   margin-bottom: 10px;
 }
 .image-list{
-  width: 500px;
+  width: 40vw;
   margin-bottom: 10px;
 }
 .new-item-images{
@@ -126,7 +127,7 @@ header a:hover{
   padding: 5px;
 }
 #add-new-item-btn{
-  width: 500px;
+  width: 40vw;
 }
 
 #selected-image-text{
@@ -488,4 +489,143 @@ color: black;
 }
 .listing-details-group-ud{
   color: white;
+}
+/* Burger Menu start */
+/* Position and sizing of burger button */
+.bm-burger-button {
+  position: fixed;
+  width: 36px;
+  height: 30px;
+  left: 36px;
+  top: 36px;
+}
+
+/* Color/shape of burger icon bars */
+.bm-burger-bars {
+  background: #373a47;
+}
+
+/* Color/shape of burger icon bars on hover*/
+.bm-burger-bars-hover {
+  background: #a90000;
+}
+
+/* Position and sizing of clickable cross button */
+.bm-cross-button {
+  height: 24px;
+  width: 24px;
+}
+
+/* Color/shape of close button cross */
+.bm-cross {
+  background: #bdc3c7;
+}
+
+/*
+Sidebar wrapper styles
+Note: Beware of modifying this element as it can break the animations - you should not need to touch it in most cases
+*/
+.bm-menu-wrap {
+  position: fixed;
+  height: 100%;
+}
+
+/* General sidebar styles */
+.bm-menu {
+  background: #373a47;
+  padding: 2.5em 1.5em 0;
+  font-size: 1.15em;
+}
+
+/* Morph shape necessary with bubble or elastic */
+.bm-morph-shape {
+  fill: #373a47;
+}
+
+/* Wrapper for item list */
+.bm-item-list {
+  color: #b8b7ad;
+  padding: 0.8em;
+}
+
+/* Individual item */
+.bm-item {
+  display: inline-block;
+}
+
+/* Styling of overlay */
+.bm-overlay {
+  background: rgba(0, 0, 0, 0.3);
+}
+/* Burger Menu end */
+.burger{
+  display:none;
+}
+.mobile-h2{
+  display: none;
+}
+@media only screen 
+  and (max-width: 800px){
+   
+    /* #main { 
+      background-size: 100% 100%;
+      justify-content: flex-start;
+    } */
+    html {
+      font-size: 75%;
+    }
+    /* #nav {
+      width: 90%;
+      padding: 0 5% 0 5%;
+    } */
+    #sub-title{
+      color: red;
+    }
+    .tabs{
+      display: none;
+    }
+    .burger{
+      display: flex;
+      text-align: center;
+    }
+    .mobile-header{
+      display: block;
+      text-align: center;
+      font-family: 'Anton', sans-serif;
+      font-size: 1.5em;
+    }
+    header {
+      grid-template-columns: 55% 2% 30% 3%;
+      margin-top: 3%;
+    }
+    #app-title{
+      margin-left: 40%;
+    }
+    .listing-image {
+      width: 100px;
+      height: 80%;
+      object-fit: cover;
+    }
+    .listing-row-details p,a h2{
+      margin-left: 10px;
+      margin-right: 20px;
+    }
+    #listing-details {
+      flex-direction: column;
+      align-self: center;
+    }
+    #main-pic {
+      width: 90vw;
+      margin-left: 0px;
+      height: 45vh;
+    }
+    .add-item-comp {
+      width: 90vw;
+    }
+    .add-item-form {
+        width: 80vw;
+    }
+    .input-group {
+      width: 80vw;
+    }
 }

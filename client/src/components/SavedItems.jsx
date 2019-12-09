@@ -19,6 +19,7 @@ export default function SavedItems(props) {
 
   return (
     <div>
+      <div className="mobile-header">Saved Listings</div>
       {items && items.map(item => (
         <>
           <div className="listing-row">

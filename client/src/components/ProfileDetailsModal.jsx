@@ -1,8 +1,10 @@
 import React from 'react'
 import { Button, Modal } from 'react-bootstrap';
 import moment from 'moment';
+import { withRouter } from 'react-router';
 
-export default function ProfileDetailsModal(props) {
+function ProfileDetailsModal(props) {
+
   return (
     <Modal
       {...props}
@@ -34,3 +36,4 @@ export default function ProfileDetailsModal(props) {
     </Modal>
   )
 }
+export default withRouter(ProfileDetailsModal);

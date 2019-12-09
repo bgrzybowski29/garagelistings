@@ -19,6 +19,7 @@ export default function MyItems(props) {
 
   return (
     <div>
+      <div className="mobile-header">My Listings</div>
       {items && items.map(item => (
         <>
           <div className="listing-row">

@@ -10,6 +10,10 @@ import { verifyUser } from './services/api-helper';
 import Home from './components/Home';
 import ItemDetails from './components/ItemDetails';
 import EditItem from './components/EditItem';
+import MyItems from './components/MyItems';
+import SavedItems from './components/SavedItems';
+import AllItems from './components/AllItems';
+import AddItem from './components/AddItem';
 
 const App = (props) => {
   const [currentUser, setcurrentUser] = useState(null);
@@ -67,6 +71,10 @@ const App = (props) => {
             itemId={props.match.params.itemId}
             currentUser={currentUser}
           />} />
+        <Route exact path="/alllistings" render={(props) => <AllItems currentUser={currentUser} />} />
+        <Route exact path="/mylistings" render={(props) => <MyItems currentUser={currentUser} />} />
+        <Route exact path="/savedlistings" render={(props) => <SavedItems currentUser={currentUser} />} />
+        <Route exact path="/addlisting" render={(props) => <AddItem />} />
       </main >
       <Footer />
     </div>

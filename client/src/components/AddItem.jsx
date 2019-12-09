@@ -90,6 +90,7 @@ const AddItem = (props) => {
 
   return (
     <div className="add-item-comp">
+      <div className="mobile-header">Add Listing</div>
       <form className="add-item-form" >
         <label>Title</label>
         <input type='text' value={title} onChange={e => setTitle(e.target.value)} />
