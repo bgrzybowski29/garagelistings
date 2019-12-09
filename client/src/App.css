@@ -561,7 +561,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 .burger{
   display:none;
 }
-.mobile-h2{
+.mobile-header{
   display: none;
 }
 @media only screen 
