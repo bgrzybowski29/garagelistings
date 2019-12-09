@@ -14,6 +14,7 @@ import MyItems from './components/MyItems';
 import SavedItems from './components/SavedItems';
 import AllItems from './components/AllItems';
 import AddItem from './components/AddItem';
+import ChangePasswordForm from './components/ChangePasswordForm';
 
 const App = (props) => {
   const [currentUser, setcurrentUser] = useState(null);
@@ -75,6 +76,7 @@ const App = (props) => {
         <Route exact path="/mylistings" render={(props) => <MyItems currentUser={currentUser} />} />
         <Route exact path="/savedlistings" render={(props) => <SavedItems currentUser={currentUser} />} />
         <Route exact path="/addlisting" render={(props) => <AddItem />} />
+        <Route exact path="/changepassword" render={(props) => <ChangePasswordForm setUser={setUser} />} />
       </main >
       <Footer />
     </div>

@@ -1,5 +1,5 @@
 class AuthenticationController < ApplicationController
-  before_action :authorize_request, except: :login
+  before_action :authorize_request, except: [:login, :update_password]
 
   # POST /auth/login
   def login
@@ -21,9 +21,28 @@ class AuthenticationController < ApplicationController
     render json: @current_user, status: :ok
   end
 
+  def update_password
+    @user=User.find_by_username(reset_params[:username])
+ 
+    if @user.authenticate(reset_params[:current_password])   
+      @user.password=(reset_params[:new_password])
+      if @user.save
+        render json: @user
+      else
+        render json: @user.errors, status: :unprocessable_entity
+      end
+    else
+      render json: {error:"Current password is incorrect"}, status: :unprocessable_entity
+    end
+end
+
   private
 
   def login_params
     params.permit(:username, :password)
   end
+  def reset_params
+    params.permit(:username, :current_password, :new_password)
+  end
+
 end

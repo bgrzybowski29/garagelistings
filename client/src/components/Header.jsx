@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { DropdownButton, Dropdown, Button } from 'react-bootstrap';
 import ProfileDetailsModal from './ProfileDetailsModal';
 import { slide as Menu } from 'react-burger-menu'
 
-export default function Header(props) {
+function Header(props) {
   const [modalShow, setModalShow] = useState(false);
   const [isOpen, setIsOpen] = useState({ menuOpen: false });
 
@@ -21,6 +21,9 @@ export default function Header(props) {
   const closeMenu = () => {
     setIsOpen({ menuOpen: false });
   }
+  const handleChangePassword = () => {
+    props.history.push("/changepassword");
+  }
   return (
     <header>
       <Link to="/"><p id="app-title"><span id="title1">Garage</span> <span id="title2">Listings</span></p></Link>
@@ -34,7 +37,6 @@ export default function Header(props) {
               <i class="im im-user-circle"></i>
               <DropdownButton
                 alignRight
-                // title={<i class="im im-menu"></i>}
                 title={props.currentUser.firstname}
                 id="dropdown-menu-align-right">
                 <Dropdown.Item eventKey="1" onClick={() => {
@@ -42,7 +44,9 @@ export default function Header(props) {
                   window.history.replaceState(null, null, '/shay');
                 }
                 }>View Profile</Dropdown.Item>
-                <Dropdown.Item eventKey="2" onClick={props.handleLogout}>Logout</Dropdown.Item>
+
+                <Dropdown.Item eventKey="2" onClick={() => handleChangePassword()}>Change Password</Dropdown.Item>
+                <Dropdown.Item eventKey="3" onClick={props.handleLogout}>Logout</Dropdown.Item>
               </DropdownButton>
             </>
             :
@@ -69,3 +73,4 @@ export default function Header(props) {
     </header >
   )
 }
+export default withRouter(Header);

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const baseUrl = 'https://garagelistings-api.herokuapp.com';
-// const baseUrl = 'http://localhost:3000';
+// const baseUrl = 'https://garagelistings-api.herokuapp.com';
+const baseUrl = 'http://localhost:3000';
 
 const api = axios.create({
   baseURL: baseUrl
@@ -17,6 +17,12 @@ export const loginUser = async (loginData) => {
   localStorage.setItem('authToken', resp.data.token);
   api.defaults.headers.common.authorization = `Bearer ${resp.data.token}`
   return resp.data.user
+}
+export const changePassword = async (loginData) => {
+  const resp = await api.post('/auth/resetpassword', loginData)
+  localStorage.setItem('authToken', resp.data.token);
+  api.defaults.headers.common.authorization = `Bearer ${resp.data.token}`
+  return resp.data
 }
 
 export const registerUser = async (registerData) => {

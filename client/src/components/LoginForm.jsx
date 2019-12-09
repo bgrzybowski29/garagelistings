@@ -28,7 +28,7 @@ const LoginForm = (props) => {
         <h1><span className="log-in">Log in</span> or <span className="register">register</span></h1>
         <p className="float">
           <label for="login">Username</label>
-          <input type='text' value={username} onChange={e => setUsername(e.target.value)} placeholder="Username or email" />
+          <input type='text' value={username} onChange={e => setUsername(e.target.value)} placeholder="Username" />
         </p>
         <p className="float">
           <label for="password">Password</label>

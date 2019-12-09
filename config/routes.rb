@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :items
   # resources :useritems
   post '/auth/login', to: 'authentication#login'
+  post '/auth/resetpassword', to: 'authentication#update_password'
   get '/auth/verify', to: 'authentication#verify'
   resources :users
 
