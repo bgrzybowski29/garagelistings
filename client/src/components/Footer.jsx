@@ -4,7 +4,7 @@ export default function Footer(props) {
 
   return (
     <footer>
-       <a href="https://github.com/bgrzybowski29/garagelistingst">
+      <a href="https://github.com/bgrzybowski29/garagelistings">
         {/* <img className='image-footer' src={gitHub} border="0" alt="" /> */}
         <i class="im im-github"></i>
       </a>
