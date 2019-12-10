@@ -23,9 +23,10 @@ function ItemDetails(props) {
     const itemsResponse = await getItem(id);
     setListing(itemsResponse);
     setbackGround(itemsResponse.default_image);
+    debugger
     if (itemsResponse.user_id === props.currentUser.id) {
       setIsOwner(true);
-      setSellerProfile(itemsResponse.currentUser);
+      setSellerProfile(itemsResponse.user);
     }
     else {
       handleGetSellerProfile(itemsResponse.user_id);
