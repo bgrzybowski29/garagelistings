@@ -15,6 +15,8 @@ import SavedItems from './components/SavedItems';
 import AllItems from './components/AllItems';
 import AddItem from './components/AddItem';
 import ChangePasswordForm from './components/ChangePasswordForm';
+import ResetPasswordForm from './components/ResetPasswordForm';
+import ForgotPasswordForm from './components/ForgotPasswordForm';
 
 const App = (props) => {
   const [currentUser, setcurrentUser] = useState(null);
@@ -37,7 +39,9 @@ const App = (props) => {
   }
   useEffect(() => {
     verify();
-    if (!currentUser) props.history.push("/login");
+    console.log(props.location.pathname.includes('resetpassword'))
+    if (!currentUser && !props.location.pathname.includes('resetpassword'))
+      props.history.push("/login");
   }, []);
 
 
@@ -77,6 +81,8 @@ const App = (props) => {
         <Route exact path="/savedlistings" render={(props) => <SavedItems currentUser={currentUser} />} />
         <Route exact path="/addlisting" render={(props) => <AddItem />} />
         <Route exact path="/changepassword" render={(props) => <ChangePasswordForm setUser={setUser} />} />
+        <Route exact path="/resetpassword/:resetToken" render={(props) => <ResetPasswordForm resetToken={props.match.params.resetToken} />} />
+        <Route exact path="/forgot" render={(props) => <ForgotPasswordForm />} />
       </main >
       <Footer />
     </div>

@@ -112,4 +112,7 @@ Rails.application.configure do
   :authentication       => "plain",
   :enable_starttls_auto => true
   }
+  Rails.application.configure do
+    config.x.web_app_url="http://garagelistings.surge.sh/resetpassword/"
+  end
 end

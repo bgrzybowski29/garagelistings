@@ -38,6 +38,7 @@ const LoginForm = (props) => {
           <input type="submit" name="submit" value="Log in" />
           <Link to="/register"><span className="register">register</span></Link>
         </p>
+        <Link to="/forgot"><span className="forgot">Forgot Password</span></Link>
       </form>
       <br />
       <p>{errorMessage}</p>

@@ -59,4 +59,8 @@ Rails.application.configure do
   :authentication       => "plain",
   :enable_starttls_auto => true
   }
+  Rails.application.configure do
+    config.x.web_app_url="http://localhost:3001/resetpassword/"
+  end
+  
 end
