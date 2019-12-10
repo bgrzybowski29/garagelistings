@@ -1,5 +1,4 @@
 class UserMailer < ApplicationMailer
-  config.load_defaults 5.1
   default from: "garagelistings1@gmail.com"
 
   def register_email(user)

@@ -83,7 +83,6 @@ function ItemDetails(props) {
       {listing &&
         <>
           <div id="listing-image-group">
-            {/* <div id="main-pic" style={divStyle} /> */}
             <img id="main-pic" src={backGround} alt="" />
 
             <div className="listing-pics">
